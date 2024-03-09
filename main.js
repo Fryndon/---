@@ -1,16 +1,19 @@
-import { showTable } from './render.js';
-import { step } from './game.js';
+const N = 3;
+const COMB_LEN = 3;
 
-const N = 4
-const CombLen = 3
-const players = ['X', 'O']
-const field = Array.from({ length: N }, (i) => Array.from({ length: N },()=>' '));
+const players = ["X", "O"];
+let currentPlayerIndex = 0;
+let cnt = 1;
+let gameOver = false;
+const field = Array.from({ length: N }, (i) =>
+  Array.from({ length: N }, () => " ")
+);
 
-showTable(field)
+showTable(field);
 
-document.querySelector('#info').innerText = `Ход 1: ходит ${players[0]}`
-document.querySelector('#gameField').addEventListener("click", (e) => {
-step(+e.target.dataset.i, +e.target.dataset.j)
-})
-
-export {N, CombLen, field, players};
+document.querySelector("#info").innerText = `Ход 1: ходит ${players[0]}`;
+document.querySelector("#gameField").addEventListener("click", (e) => {
+  if (!gameOver) {
+    step(+e.target.dataset.i, +e.target.dataset.j);
+  }
+});
